@@ -1,0 +1,162 @@
+/* ========== START Dark Mode Colors ========== */
+:root {
+    --primary: #131516;
+    --secondary: #2B2F31;
+    --text: #d8d4cf;
+    --blue: #004daa;
+    --caption: #e8e6e3;
+}
+/* ========== END Dark Mode Colors ========== */
+/* ========== START CSS Reset ========== */
+html {
+    box-sizing: border-box;
+    font-size: 16px;
+}
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+body, h1, h2, h3, h4, h5, h6, p, ol, ul {
+    margin: 0;
+    padding: 0;
+    font-weight: normal;
+}
+ol, ul {
+    list-style: none;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+/* ========== END CSS Reset ========== */
+
+
+
+body {
+    height: 100vh;
+    background-color: var(--primary);
+
+    display: flex;
+    padding: 5vw;
+}
+
+
+#grid {
+    width: 700px;
+    height: 500px;
+    margin: auto;
+    /* flex: 1;     */
+    /* background-color: var(--secondary); */
+    /* border: 1px solid var(--secondary); */
+
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.row {
+    flex: 1 1 100%;
+    /* width: 100%; */
+    border-top: 1px solid var(--blue);
+
+    /* padding: 20px; */
+
+    display: flex;
+
+    margin: 0;
+    padding: 0;
+
+}
+
+
+#first-row {
+    border: 0;
+}
+
+.cell {
+
+    margin: 0;
+    max-height: 166px;
+    min-height: 166px;
+    flex: 1;
+    /* border: 1px solid red; */
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    font-size: 8vw;
+
+
+    /* border-top: 1px solid red; */
+    border-right: 1px solid var(--blue);
+    
+}
+
+
+.last {
+    border-right: 0;
+}
+
+
+#winner {
+
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    margin-top: -50vh; 
+    margin-left: -50vw; 
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    
+    background-color: var(--secondary);
+    opacity: 0.9;
+}
+
+#winner p {
+    font-size: 10vw;
+    color: var(--text);
+    text-shadow: -7px 1px var(--blue);
+
+}
+
+#winner button {
+    width: 20vw;
+    height: 8vh;
+    font-size: 2rem;
+    background-color: var(--blue);
+    border: 0;
+    border-radius: 24px;
+    opacity: 1;
+    color: var(--text);
+    font-weight: 800;
+    box-shadow: 8px 8px var(--primary);
+}
+
+#winner button:hover {
+    transform: scale(1.05);
+
+}
+
+
+#score {
+    display: flex;
+    justify-content: space-between;
+    width: 90vw;
+    position: fixed;
+    font-size: 3vw;
+
+    color: var(--text);
+}
+
+@media (max-width: 400px) {
+    .cell {
+        font-size: 20vw;
+
+    }
+
+}
