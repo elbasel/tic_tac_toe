@@ -17,7 +17,14 @@ const currentPlayer = (function () {
 })();
 
 function play(event) {
+  if (!(event.target.classList.contains('cell'))) {
+      console.log(`Captured click event at:`)
+      console.log(event.target)
+      event.stopPropagation()
+      return;
+  }
   const mark = currentPlayer.currentPlayer(event) === 1 ? "X" : "O";
+
   if (event.target.textContent === "") {
     event.target.textContent = mark;
   } else {
@@ -189,5 +196,24 @@ function formatWinner(segment) {
 }
 
 
+const ai = (function () {
+    
+    function init() {
+        const enableButton = document.querySelector('#ai button')
+        enableButton.addEventListener('click', e => console.log('ai'))
+    }
+ 
+    function start(start) {
+        
+    }
+
+    return {
+        init
+    }
+
+})()
+
+ai.init()
+    
 
 game.start();
