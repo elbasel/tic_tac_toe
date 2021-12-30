@@ -39,11 +39,25 @@ const gameBoard = (function () {
         if (diag === 2) return [board[2], board[4], board[6]];
     }
 
+
+    function isValidMove(cell) {
+        return cell.textContent === '';
+    }
+
+    function setCell(cell, text) {
+        if (isValidMove(cell)) {
+            cell.textContent = text;
+            cell.classList.remove('puff-in-center')
+            cell.classList.add('puff-in-center')
+        }
+    }
+
     return {
         board,
         getRow,
         getColumn,
         getDiagonal,
+        setCell,
     };
 })();
 
@@ -259,17 +273,17 @@ const ai = (function () {
     }
 
     function makeRandomMove() {
-        function getRandomIndex(min, max) {
+
+        function getRandomNumber(min, max) {
+            // max is not inclusive
             return Math.trunc(Math.random() * (max - min) + min);
         }
 
-     
 
 
         for (let i = 0; i < 9; i++) {
-            // debugger
 
-            let randomIndex = getRandomIndex(0, 9)
+            let randomIndex = getRandomNumber(0, 9)
 
             let randomCell = gameBoard.board[randomIndex]
             if (isValidMove(randomCell)) {
@@ -282,7 +296,7 @@ const ai = (function () {
 
 
     function playVsAi(event) {
-        
+
         if (isValidMove(event.target)) {
             event.target.textContent = 'X'
             makeRandomMove()
@@ -292,11 +306,11 @@ const ai = (function () {
             if (winner) {
                 displayGameOverMessage(winner);
             }
-    
+
             return true;
         }
 
-      
+
 
 
 
