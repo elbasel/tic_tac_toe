@@ -99,6 +99,7 @@ function isGameOver() {
     for (const segment of group) {
       winner = getWinner(segment);
       if (winner) {
+          formatWinner(segment)
         return winner;
       }
     }
@@ -157,6 +158,8 @@ function displayGameOverMessage(winner) {
 
 function restartGame() {
   gameBoard.board.forEach((cell) => (cell.textContent = ""));
+  gameBoard.board.forEach((cell) => (cell.classList.remove("red")));
+
   document.querySelector("#winner-msg-container").innerHTML = "";
 }
 
@@ -171,13 +174,20 @@ const Scores = (function name() {
     if (winner === "X") xScore++;
     if (winner === "O") oScore++;
 
-    xScorePara.textContent = `X: ${xScore}`;
-    oScorePara.textContent = `O: ${oScore}`;
+    xScorePara.textContent = `X : ${xScore}`;
+    oScorePara.textContent = `O : ${oScore}`;
   }
 
   return {
     updateScore,
   };
 })();
+
+
+function formatWinner(segment) {
+    segment.forEach(cell => cell.classList.add('red'))
+}
+
+
 
 game.start();
