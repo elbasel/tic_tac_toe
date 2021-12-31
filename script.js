@@ -44,11 +44,14 @@ const gameBoard = (function () {
         return cell.textContent === '';
     }
 
+    // max cell index = 8 , min = 0 for a total of nine cells
+    function getCell(cellIndex) {
+        return gameBoard.board[cellIndex]
+    }
+
     function setCell(cell, text) {
         if (isValidMove(cell)) {
             cell.textContent = text;
-            cell.classList.remove('puff-in-center')
-            cell.classList.add('puff-in-center')
         }
     }
 
@@ -58,6 +61,7 @@ const gameBoard = (function () {
         getColumn,
         getDiagonal,
         setCell,
+        getCell,
         isValidMove,
     };
 })();
@@ -309,12 +313,10 @@ const ai = (function () {
 
     }
 
-    function getBestMove() {
-
-    }
+   
     
 
-    minimaxTable = {
+    const minimaxTable = {
         //map return values from isGameOver function to minimax values
         false: 0, //tie
         X: -1,  //player is always 'X', i.e if X is the winner then AI loses
@@ -345,6 +347,7 @@ const ai = (function () {
 
 
     return {
+        minimax,
         init
     }
 
