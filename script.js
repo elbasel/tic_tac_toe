@@ -58,6 +58,7 @@ const gameBoard = (function () {
         getColumn,
         getDiagonal,
         setCell,
+        isValidMove,
     };
 })();
 
@@ -268,9 +269,6 @@ const ai = (function () {
 
     }
 
-    function isValidMove(cell) {
-        return cell.textContent === '';
-    }
 
     function makeRandomMove() {
 
@@ -280,13 +278,12 @@ const ai = (function () {
         }
 
 
-
         for (let i = 0; i < 9; i++) {
 
             let randomIndex = getRandomNumber(0, 9)
 
             let randomCell = gameBoard.board[randomIndex]
-            if (isValidMove(randomCell)) {
+            if (gameBoard.isValidMove(randomCell)) {
                 randomCell.textContent = 'O';
                 return;
             }
@@ -297,7 +294,7 @@ const ai = (function () {
 
     function playVsAi(event) {
 
-        if (isValidMove(event.target)) {
+        if (gameBoard.isValidMove(event.target)) {
             event.target.textContent = 'X'
             makeRandomMove()
 
@@ -309,10 +306,6 @@ const ai = (function () {
 
             return true;
         }
-
-
-
-
 
     }
 
