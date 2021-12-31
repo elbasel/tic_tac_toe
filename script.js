@@ -309,6 +309,40 @@ const ai = (function () {
 
     }
 
+    function getBestMove() {
+
+    }
+    
+
+    minimaxTable = {
+        //map return values from isGameOver function to minimax values
+        false: 0, //tie
+        X: -1,  //player is always 'X', i.e if X is the winner then AI loses
+        O: 1,   //O wins i.e AI wins
+    };
+
+    function minimax(node, depth, isMaximizingPlayer) {
+        if (depth === 0) {
+            return minimaxTable[isGameOver()] //will return either 0, 1 or -1 
+        }
+
+        if (isMaximizingPlayer) {
+            let value = -Infinity
+            for (child of node) {
+                value = Math.max(value, minimax(child, depth-1, false))
+            }
+            return value
+        }
+        else {
+            let value = Infinity
+            for (child of node) {
+                value = Math.min(value, minimax(child, depth-1, true))
+            }
+            return value
+        }
+
+    }
+
 
     return {
         init
