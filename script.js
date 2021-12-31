@@ -50,9 +50,9 @@ const gameBoard = (function () {
     }
 
     function setCell(cell, text) {
-        if (isValidMove(cell)) {
-            cell.textContent = text;
-        }
+        // if (isValidMove(cell)) {
+        cell.textContent = text;
+        // }
     }
 
     return {
@@ -111,7 +111,7 @@ function isGameOver() {
         for (const segment of group) {
             winner = getWinner(segment);
             if (winner) {
-                formatWinner(segment)
+                // formatWinner(segment)
                 return winner;
             }
         }
@@ -128,7 +128,7 @@ function isGameOver() {
                 }
             }
         }
-        return "draw";
+        // return "draw";
     }
 
     return false;
@@ -300,7 +300,17 @@ const ai = (function () {
 
         if (gameBoard.isValidMove(event.target)) {
             event.target.textContent = 'X'
-            makeRandomMove()
+            // makeRandomMove()
+            let depth = 0;
+            for (let i = 0; i < 8; i++) {
+                if (gameBoard.isValidMove(gameBoard.getCell(i))) {
+                    depth++;
+                }
+            }
+            debugger
+            gameBoard.setCell(gameBoard.getCell(getBestMove(depth, false)), 'O')
+
+
 
             const winner = isGameOver();
 
@@ -313,42 +323,85 @@ const ai = (function () {
 
     }
 
+
+    const isGameOverTable = {
+        false: 0,
+        'X': -1,
+        'O': 1,
+    }
    
-    
+    function getBestMove(depth, isHuman) {
 
-    const minimaxTable = {
-        //map return values from isGameOver function to minimax values
-        false: 0, //tie
-        X: -1,  //player is always 'X', i.e if X is the winner then AI loses
-        O: 1,   //O wins i.e AI wins
-    };
+        debugger
+     
 
-    function minimax(node, depth, isMaximizingPlayer) {
         if (depth === 0) {
-            return minimaxTable[isGameOver()] //will return either 0, 1 or -1 
+            const returnValue = isGameOverTable[isGameOver()]
+            // return isGameOverTable[isGameOver()]
+            debugger
+            console.log({ returnValue })
+            return returnValue
+            
         }
 
-        if (isMaximizingPlayer) {
-            let value = -Infinity
-            for (child of node) {
-                value = Math.max(value, minimax(child, depth-1, false))
+        if (isHuman) {
+            let value = Infinity
+            let bestMove = -1;
+            for (let i = 0; i < 9; i++) {
+                let cell = gameBoard.getCell(i)
+                if (gameBoard.isValidMove(cell)) {
+                    gameBoard.setCell(cell, 'X')
+                    cell.style.color = 'red'
+
+                    const childNode = getBestMove(depth-1, false)
+                    
+                    value = Math.min(value, childNode)
+                    if (childNode === value) {
+                        bestMove = i;
+                    }
+                    
+                    gameBoard.setCell(cell, '')
+                    
+                }
             }
-            return value
+            return bestMove
         }
         else {
-            let value = Infinity
-            for (child of node) {
-                value = Math.min(value, minimax(child, depth-1, true))
+            let value = -Infinity
+            let bestMove = -1;
+            for (let i = 0; i < 9; i++) {
+                let cell = gameBoard.getCell(i)
+                if (gameBoard.isValidMove(cell)) {
+                    gameBoard.setCell(cell, 'O')
+                    cell.style.color = 'blue'
+
+                    const childNode = getBestMove(depth-1, true)
+                   
+                    value = Math.max(value, childNode)
+                    if (childNode === value) {
+                        bestMove = i;
+                    }
+                    gameBoard.setCell(cell, '')
+                }
             }
-            return value
+            return bestMove
         }
+
+
+
+   
+
+
+
 
     }
 
 
+
+
     return {
-        minimax,
-        init
+        init,
+        getBestMove
     }
 
 })()
