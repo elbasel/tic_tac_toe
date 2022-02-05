@@ -166,44 +166,33 @@ body {
 
 #ai {
   /* border: 1px solid red; */
-  width: 80vw;
+  /* width: 80vw; */
   position: fixed;
   bottom: 0;
-  /* right: 0; */
-  left: 10vw;
-  right: 10vw;
-  height: 10vh;
-  /* left: 50%; */
-  /* right: 50%; */
-  /* right: 0; */
-  /* margin: auto; */
-
+  padding: 8px;
+  padding-bottom: 16px;
+  right: 0;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 #ai button {
-  /* display: block; */
   font-size: 2vw;
-  width: 50%;
-  height: 70%;
-  /* margin: auto; */
   background-color: var(--blue);
   color: var(--text);
   border: 0;
   border-radius: 12px;
   opacity: 0.3;
+  padding: 16px;
 }
 #ai button:hover {
-  transform: scale(1.05);
-  opacity: 1;
+  transform: scale(1.01);
+  opacity: 0.8;
 }
 
 .red {
   color: red;
-  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
-  font-size: 10vw;
   text-shadow: -3px 5px 20px red;
 }
 
