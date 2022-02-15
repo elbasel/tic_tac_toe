@@ -210,3 +210,34 @@ body {
     font-size: 5vw;
   }
 }
+
+#difficulty {
+
+  /* border: 1px solid red; */
+  position: fixed;
+  bottom: 0;
+
+  padding: 8px;
+  padding-bottom: 16px;
+  /* right: 0; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  visibility: hidden;
+}
+
+select {
+  font-size: 2vw;
+  background-color: var(--blue);
+  color: var(--text);
+  border: 0;
+  border-radius: 12px;
+  opacity: 0.3;
+  padding: 16px;
+}
+
+select:hover {
+  transform: scale(1.01);
+  opacity: 0.8;
+}
