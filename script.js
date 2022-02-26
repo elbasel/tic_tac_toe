@@ -319,14 +319,11 @@ const ai = (function () {
 
         if (gameBoard.isValidMove(event.target)) {
             event.target.textContent = 'X'
-            // debugger
             if (difficultySelection.value === 'Easy') {
                 makeRandomMove()
             }
             else {
                 const minimaxMove = minimax(getBoardState(), true)
-                // minimaxMove = [minimaxMove[1], minimaxMove[2]]
-                // debugger
                 const oneDindex = (minimaxMove[1] * 3) + minimaxMove[2]; // Indexes
                 if (!isNaN(oneDindex)) {
                     gameBoard.setCell(gameBoard.board[oneDindex], 'O')
@@ -391,12 +388,10 @@ const ai = (function () {
             if (winner) return winner;
 
         }
-        // debugger
 
         for (let i = 0; i < 3; i++) {
 
             for (let j = 0; j < 3; j++) {
-                let cell = boardState[i][j]
                 if (boardState[i][j] === '') return false;
             }
         }
@@ -415,15 +410,9 @@ const ai = (function () {
     }
 
 
-    function copyState(state) {
-        return state.map(function (arr) {
-            return arr.slice()
-        })
-    }
 
     function minimax(boardState, isMaxmizingPlayer) {
-        // debugger
-        boardState = copyState(boardState)
+        /// "O" is the maxmizing player.
         const gameOver = isBoardOver(boardState)
         if (gameOver) {
             if (gameOver === 'O') {
@@ -497,9 +486,6 @@ const ai = (function () {
 
     return {
         init,
-        getBoardState,
-        isBoardOver,
-        minimax
     }
 
 })()
